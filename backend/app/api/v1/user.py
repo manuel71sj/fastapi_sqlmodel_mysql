@@ -1,51 +1,50 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 from typing import Annotated
 
+from common.jwt import CurrentUser, DependsJwtUser
+from common.pagination import PageDepends, paging_data
+from common.response.response_schema import response_base
+from database.db_mysql import async_engine
 from fastapi import APIRouter, Query
+from schemas.user import Avatar, CreateUser, GetUserInfo, ResetPassword, UpdateUser
+from services.user_service import UserService
 from sqlmodel.ext.asyncio.session import AsyncSession
-
-from backend.app.common.jwt import CurrentUser, DependsJwtUser
-from backend.app.common.pagination import PageDepends, paging_data
-from backend.app.common.response.response_schema import response_base
-from backend.app.database.db_mysql import async_engine
-from backend.app.schemas.user import Avatar, CreateUser, GetUserInfo, ResetPassword, UpdateUser
-from backend.app.services.user_service import UserService
 
 router = APIRouter()
 
 
-@router.post('/register', summary='用户注册')
+@router.post('/register', summary='사용자 등록')
 async def user_register(obj: CreateUser):
     await UserService.register(obj=obj)
     return await response_base.success()
 
 
-@router.post('/password/reset', summary='密码重置', dependencies=[DependsJwtUser])
+@router.post('/password/reset', summary='비밀번호 재설정', dependencies=[DependsJwtUser])
 async def password_reset(obj: ResetPassword):
     await UserService.pwd_reset(obj=obj)
     return await response_base.success()
 
 
-@router.get('/{username}', summary='查看用户信息', dependencies=[DependsJwtUser])
+@router.get('/{username}', summary='사용자 정보 보기', dependencies=[DependsJwtUser])
 async def get_user(username: str):
     data = await UserService.get_userinfo(username=username)
     return await response_base.success(data=data)
 
 
-@router.put('/{username}', summary='更新用户信息', dependencies=[DependsJwtUser])
+@router.put('/{username}', summary='사용자 정보 업데이트', dependencies=[DependsJwtUser])
 async def update_userinfo(username: str, obj: UpdateUser):
     await UserService.update(username=username, obj=obj)
     return await response_base.success()
 
 
-@router.put('/{username}/avatar', summary='更新头像', dependencies=[DependsJwtUser])
+@router.put('/{username}/avatar', summary='아바타 업데이트', dependencies=[DependsJwtUser])
 async def update_avatar(username: str, avatar: Avatar):
     await UserService.update_avatar(username=username, avatar=avatar)
     return await response_base.success()
 
 
-@router.get('', summary='（模糊条件）分页获取所有用户', dependencies=[DependsJwtUser, PageDepends])
+@router.get(
+    '', summary='(퍼지 조건) 모든 사용자를 불러오기 위한 페이징 호출', dependencies=[DependsJwtUser, PageDepends]
+)
 async def get_all_users(
     username: Annotated[str | None, Query()] = None,
     phone: Annotated[str | None, Query()] = None,
@@ -57,13 +56,13 @@ async def get_all_users(
     return await response_base.success(data=page_data)
 
 
-@router.put('/{pk}/super', summary='修改用户超级权限', dependencies=[DependsJwtUser])
+@router.put('/{pk}/super', summary='사용자 슈퍼 권한 수정', dependencies=[DependsJwtUser])
 async def super_set(current_user: CurrentUser, pk: int):
     await UserService.update_permission(current_user=current_user, pk=pk)
     return await response_base.success()
 
 
-@router.put('/{pk}/status', summary='修改用户状态', dependencies=[DependsJwtUser])
+@router.put('/{pk}/status', summary='사용자 상태 수정하기', dependencies=[DependsJwtUser])
 async def status_set(current_user: CurrentUser, pk: int):
     await UserService.update_status(current_user=current_user, pk=pk)
     return await response_base.success()
@@ -71,8 +70,8 @@ async def status_set(current_user: CurrentUser, pk: int):
 
 @router.delete(
     path='/{username}',
-    summary='用户注销',
-    description='用户注销 != 用户登出，注销之后用户将从数据库删除',
+    summary='사용자 취소',
+    description='사용자 로그아웃! = 사용자가 로그아웃되었음을 의미하며, 로그아웃 후 데이터베이스에서 사용자가 삭제됩니다.',
     dependencies=[DependsJwtUser],
 )
 async def delete_user(current_user: CurrentUser, username: str):

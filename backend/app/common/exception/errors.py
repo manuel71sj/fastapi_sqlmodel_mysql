@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 from typing import Any
 
+from common.response.response_code import CustomCode
 from fastapi import HTTPException
 from starlette.background import BackgroundTask
-
-from backend.app.common.response.response_code import CustomCode
 
 
 class BaseExceptionMixin(Exception):

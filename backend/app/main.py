@@ -1,12 +1,11 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 import uvicorn
 
-from path import Path
+from common.log import log
 
-from backend.app.common.log import log
-from backend.app.core.conf import settings
-from backend.app.core.registrar import register_app
+# from common.log import log
+from core.conf import settings
+from core.registrar import register_app
+from path import Path
 
 app = register_app()
 

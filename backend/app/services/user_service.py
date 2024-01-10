@@ -1,20 +1,18 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
+from common import jwt
+from common.exception import errors
+from common.jwt import superuser_verify
+from common.redis import redis_client
+from common.response.response_code import CustomCode
+from crud.crud_user import UserDao
+from database.db_mysql import async_engine
 from fastapi import Request
 from fastapi.security import OAuth2PasswordRequestForm
+from models.user import User
+from schemas.user import Auth2, Avatar, CreateUser, ResetPassword, UpdateUser
 from sqlalchemy import Select
 from sqlmodel.ext.asyncio.session import AsyncSession
-
-from backend.app.common import jwt
-from backend.app.common.exception import errors
-from backend.app.common.jwt import superuser_verify
-from backend.app.common.redis import redis_client
-from backend.app.common.response.response_code import CustomCode
-from backend.app.crud.crud_user import UserDao
-from backend.app.database.db_mysql import async_engine
-from backend.app.models.user import User
-from backend.app.schemas.user import Auth2, Avatar, CreateUser, ResetPassword, UpdateUser
-from backend.app.utils.timezone import timezone
+from utils.timezone import timezone
 
 
 class UserService:

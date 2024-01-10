@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 from math import ceil
 
+from common.exception import errors
 from fastapi import FastAPI, Request, Response
 from fastapi.routing import APIRoute
-
-from backend.app.common.exception import errors
 
 
 def ensure_unique_route_names(app: FastAPI) -> None:

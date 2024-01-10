@@ -1,8 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 
-from backend.app.schemas.base import SchemaBase
-from backend.app.schemas.user import GetUserInfo
+
+from schemas.base import SchemaBase
+from schemas.user import GetUserInfo
 
 
 class Token(SchemaBase):

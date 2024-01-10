@@ -1,16 +1,15 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 import os
 
 from pathlib import Path
 
-# 获取项目根目录
-# 或使用绝对路径，指到 backend 目录为止，例如 windows：BasePath = D:\git_project\fastapi_mysql\backend
+# 프로젝트 루트 디렉터리 가져오기
+# 또는 백엔드 디렉토리의 절대 경로를 사용하세요.windows：BasePath = D:\git_project\fastapi_mysql\backend
 BasePath = Path(__file__).resolve().parent.parent.parent
 
 
-# 迁移文件存放路径
+# 마이그레이션 파일 저장 경로
 Versions = os.path.join(BasePath, 'app', 'alembic', 'versions')
 
-# 日志文件路径
+# 로그 파일 경로
 LogPath = os.path.join(BasePath, 'app', 'log')

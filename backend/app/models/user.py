@@ -1,12 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 from datetime import datetime
 
+from models.base import id_key
 from sqlmodel import Field, SQLModel
-
-from backend.app.models.base import id_key
-from backend.app.utils.generate_string import get_uuid4_str
-from backend.app.utils.timezone import timezone
+from utils.generate_string import get_uuid4_str
+from utils.timezone import timezone
 
 
 class User(SQLModel, table=True):

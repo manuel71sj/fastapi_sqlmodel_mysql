@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 import datetime
 
 from email_validator import EmailNotValidError, validate_email
 from pydantic import UUID4, ConfigDict, EmailStr, Field, HttpUrl, field_validator
-
-from backend.app.schemas.base import SchemaBase
+from schemas.base import SchemaBase
 
 
 class Auth(SchemaBase):

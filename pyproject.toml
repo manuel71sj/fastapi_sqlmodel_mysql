@@ -1,3 +1,12 @@
+[tool.poetry]
+name = "fastapi-sqlmodel-mysql"
+version = "0.1.0"
+description = ""
+authors = ["한만철 <manuel71.sj@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
 alembic="^1.13.0"
 asgiref="^3.7.2"
 asyncmy="^0.2.9"
@@ -16,9 +25,17 @@ pydantic="^2.5.2"
 pydantic-settings="^2.1.0"
 python-jose="^3.3.0"
 python-multipart="^0.0.6"
-redis= {version = "^4.6.0", extras = ["hiredis"]}
+redis = {version = "^5.0.1", extras = ["hiredis"]}
 SQLAlchemy="^2.0.23"
 sqlmodel="^0.0.14"
 starlette="^0.27.0"
 tzdata="^2023.3"
 uvicorn = { version = "^0.25.0", extras = ["standard"] }
+greenlet = "^3.0.3"
+asyncpg = "^0.29.0"
+ruff = "^0.1.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

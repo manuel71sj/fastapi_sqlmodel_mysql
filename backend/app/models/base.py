@@ -1,19 +1,17 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 from datetime import datetime
 
 from sqlmodel import Field
-
-from backend.app.utils.timezone import timezone
+from utils.timezone import timezone
 
 id_key = Field(exclude=True, primary_key=True, description='主键id')
 
 """ warning
-❓ MiXin 似乎并不支持：https://github.com/tiangolo/sqlmodel/pull/256
+❓ MiXin 지원하지 않는 것 같습니다.：https://github.com/tiangolo/sqlmodel/pull/256
 """
 
 
-# Mixin: 一种面向对象编程概念, 使结构变得更加清晰, `Wiki <https://en.wikipedia.org/wiki/Mixin/>`__
+# Mixin: 구조를 더 명확하게 만드는 객체 지향 프로그래밍 개념, `Wiki <https://en.wikipedia.org/wiki/Mixin/>`__
 class UserMixin:
     """用户 Mixin 数据类"""
 

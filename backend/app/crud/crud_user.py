@@ -1,16 +1,13 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 from datetime import datetime
 
+from common import jwt
+from crud.base import CRUDBase
+from models.user import User
+from schemas.user import Avatar, CreateUser, UpdateUser
 from sqlalchemy import and_
 from sqlalchemy.sql import Select
 from sqlmodel import desc, select
 from sqlmodel.ext.asyncio.session import AsyncSession
-
-from backend.app.common import jwt
-from backend.app.crud.base import CRUDBase
-from backend.app.models.user import User
-from backend.app.schemas.user import Avatar, CreateUser, UpdateUser
 
 
 class CRUDUser(CRUDBase[User, CreateUser, UpdateUser]):

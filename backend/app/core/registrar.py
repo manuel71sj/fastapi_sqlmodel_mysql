@@ -1,41 +1,39 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 from contextlib import asynccontextmanager
 
+from api.routers import v1
+from common.exception.exception_handler import register_exception
+from common.redis import redis_client
+from core.conf import settings
+from database.db_mysql import create_table
 from fastapi import FastAPI
 from fastapi_limiter import FastAPILimiter
 from fastapi_pagination import add_pagination
+from middleware.access_middle import AccessMiddleware
 from starlette.middleware.cors import CORSMiddleware
 from starlette.middleware.gzip import GZipMiddleware
-
-from backend.app.api.routers import v1
-from backend.app.common.exception.exception_handler import register_exception
-from backend.app.common.redis import redis_client
-from backend.app.core.conf import settings
-from backend.app.database.db_mysql import create_table
-from backend.app.middleware.access_middle import AccessMiddleware
-from backend.app.utils.health_check import ensure_unique_route_names, http_limit_callback
+from utils.health_check import ensure_unique_route_names, http_limit_callback
 
 
 @asynccontextmanager
 async def register_init(app: FastAPI):
     """
-    启动初始化
+    초기화 시작
 
     :return:
     """
-    # 创建数据库表
+    # 데이터베이스 테이블 만들기
     await create_table()
-    # 连接 redis
+    # redis 연결
     await redis_client.open()
-    # 初始化 limiter
+    # 리미터 초기화
     await FastAPILimiter.init(redis_client, prefix=settings.LIMITER_REDIS_PREFIX, http_callback=http_limit_callback)
 
     yield
 
-    # 关闭 redis 连接
+    # redis 연결 닫기
     await redis_client.close()
-    # 关闭 limiter
+    # 닫기 리미터
     await FastAPILimiter.close()
 
 
@@ -51,19 +49,19 @@ def register_app():
         lifespan=register_init,
     )
 
-    # 静态文件
+    # 정적 파일
     register_static_file(app)
 
-    # 中间件
+    # 미들웨어
     register_middleware(app)
 
-    # 路由
+    # 라우팅(컴퓨터 네트워크에서)
     register_router(app)
 
-    # 分页
+    # 분페이지
     register_page(app)
 
-    # 全局异常处理
+    # 글로벌 예외 처리
     register_exception(app)
 
     return app
@@ -71,7 +69,7 @@ def register_app():
 
 def register_static_file(app: FastAPI):
     """
-    静态文件交互开发模式, 生产使用 nginx 静态资源服务
+    정적 파일 상호 작용 개발 모델, nginx 정적 리소스 서비스를 사용한 프로덕션
 
     :param app:
     :return:
@@ -90,10 +88,10 @@ def register_middleware(app) -> None:
     # gzip
     if settings.MIDDLEWARE_GZIP:
         app.add_middleware(GZipMiddleware)
-    # 接口访问日志
+    # 인터페이스 액세스 로그
     if settings.MIDDLEWARE_ACCESS:
         app.add_middleware(AccessMiddleware)
-    # 跨域
+    # 교차 도메인
     if settings.MIDDLEWARE_CORS:
         app.add_middleware(
             CORSMiddleware,

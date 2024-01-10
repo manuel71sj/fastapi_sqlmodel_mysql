@@ -1,18 +1,18 @@
 import asyncio
 import os
 import sys
+
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
-
-from alembic import context
 from sqlmodel import SQLModel
 
 sys.path.append('../../')
 
-from backend.app.core import path_conf  # noqa: E402
+from core import path_conf
 
 if not os.path.exists(path_conf.Versions):
     os.makedirs(path_conf.Versions)
@@ -37,10 +37,9 @@ target_metadata = SQLModel.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-from backend.app.database.db_mysql import SQLALCHEMY_DATABASE_URL  # noqa: E402
+from database.db_mysql import SQLALCHEMY_DATABASE_URL  # noqa: E402
 
 config.set_main_option('sqlalchemy.url', SQLALCHEMY_DATABASE_URL)
-
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.

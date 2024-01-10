@@ -1,15 +1,13 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 from __future__ import annotations
 
 import os
 
 from typing import TYPE_CHECKING
 
+from core import path_conf
+from core.conf import settings
 from loguru import logger
-
-from backend.app.core import path_conf
-from backend.app.core.conf import settings
 
 if TYPE_CHECKING:
     import loguru

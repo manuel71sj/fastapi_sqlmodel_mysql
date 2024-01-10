@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 from asgiref.sync import sync_to_async
 from fastapi.exceptions import ValidationException
 from pydantic import BaseModel, ConfigDict, PydanticUserError, ValidationError

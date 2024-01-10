@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+
 from datetime import datetime
 
+from common.log import log
 from fastapi import Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware
-
-from backend.app.common.log import log
 
 
 class AccessMiddleware(BaseHTTPMiddleware):
