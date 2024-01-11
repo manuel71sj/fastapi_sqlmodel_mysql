@@ -1,9 +1,10 @@
 
 from datetime import datetime
 
-from common.log import log
 from fastapi import Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware
+
+from common.log import log
 
 
 class AccessMiddleware(BaseHTTPMiddleware):

@@ -1,7 +1,7 @@
 line-length = 120
-target-version = "py310"
+target-version = "py311"
 cache-dir = "./.ruff_cache"
-
+src = ["backend/app",]
 [lint]
 select = [
     "E",
@@ -18,8 +18,32 @@ select = [
     "UP007"
 ]
 
+ignore = [
+    "ERA001",
+]
+
+exclude = [
+    '.cache',
+    '.git',
+    '.idea',
+    '.mypy_cache',
+    '.pytest_cache',
+    '.venv',
+    'venv',
+    'env',
+    'cached_venv',
+    'docs',
+    'deploy',
+    'var',
+    '.vscode',
+    '*migrations*',
+    'filebeat*'
+]
+
 [lint.isort]
 lines-between-types = 1
+order-by-type = true
+section-order = ["future", "standard-library", "third-party", "first-party", "local-folder"]
 
 [lint.per-file-ignores]
 "backend/app/api/v1/*.py" = ["TCH"]
@@ -28,3 +52,4 @@ lines-between-types = 1
 
 [format]
 quote-style = "single"
+preview = true

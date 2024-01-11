@@ -1,7 +1,8 @@
 from datetime import datetime
 
-from models.base import id_key
 from sqlmodel import Field, SQLModel
+
+from models.base import id_key
 from utils.generate_string import get_uuid4_str
 from utils.timezone import timezone
 

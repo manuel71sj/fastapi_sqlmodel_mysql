@@ -1,3 +1,7 @@
+from fastapi import Request
+from fastapi.security import OAuth2PasswordRequestForm
+from sqlalchemy import Select
+from sqlmodel.ext.asyncio.session import AsyncSession
 
 from common import jwt
 from common.exception import errors
@@ -6,12 +10,8 @@ from common.redis import redis_client
 from common.response.response_code import CustomCode
 from crud.crud_user import UserDao
 from database.db_mysql import async_engine
-from fastapi import Request
-from fastapi.security import OAuth2PasswordRequestForm
 from models.user import User
 from schemas.user import Auth2, Avatar, CreateUser, ResetPassword, UpdateUser
-from sqlalchemy import Select
-from sqlmodel.ext.asyncio.session import AsyncSession
 from utils.timezone import timezone
 
 

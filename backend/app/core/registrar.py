@@ -1,17 +1,18 @@
 
 from contextlib import asynccontextmanager
 
+from fastapi import FastAPI
+from fastapi_limiter import FastAPILimiter
+from fastapi_pagination import add_pagination
+from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.gzip import GZipMiddleware
+
 from api.routers import v1
 from common.exception.exception_handler import register_exception
 from common.redis import redis_client
 from core.conf import settings
 from database.db_mysql import create_table
-from fastapi import FastAPI
-from fastapi_limiter import FastAPILimiter
-from fastapi_pagination import add_pagination
 from middleware.access_middle import AccessMiddleware
-from starlette.middleware.cors import CORSMiddleware
-from starlette.middleware.gzip import GZipMiddleware
 from utils.health_check import ensure_unique_route_names, http_limit_callback
 
 

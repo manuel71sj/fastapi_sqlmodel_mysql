@@ -4,15 +4,16 @@ import sys
 
 from logging.config import fileConfig
 
-from alembic import context
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlmodel import SQLModel
 
+from alembic import context
+
 sys.path.append('../../')
 
-from core import path_conf
+from core import path_conf  # noqa: E402
 
 if not os.path.exists(path_conf.Versions):
     os.makedirs(path_conf.Versions)

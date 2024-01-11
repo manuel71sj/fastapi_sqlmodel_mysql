@@ -1,11 +1,12 @@
 
-from common.redis import redis_client
-from core.conf import settings
 from fast_captcha import img_captcha
 from fastapi import APIRouter, Depends, Request
 from fastapi_limiter.depends import RateLimiter
 from starlette.concurrency import run_in_threadpool
 from starlette.responses import StreamingResponse
+
+from common.redis import redis_client
+from core.conf import settings
 from utils.generate_string import get_uuid4_str
 
 router = APIRouter()

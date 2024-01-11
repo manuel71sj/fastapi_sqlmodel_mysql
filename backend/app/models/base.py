@@ -1,7 +1,7 @@
-
 from datetime import datetime
 
 from sqlmodel import Field
+
 from utils.timezone import timezone
 
 id_key = Field(exclude=True, primary_key=True, description='主键id')

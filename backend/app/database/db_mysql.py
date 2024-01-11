@@ -1,7 +1,8 @@
 
-from core.conf import settings
 from sqlalchemy.ext.asyncio import create_async_engine
 from sqlmodel import SQLModel
+
+from core.conf import settings
 
 # SQLALCHEMY_DATABASE_URL = (
 #     f'mysql+asyncmy://{settings.DB_USER}:{settings.DB_PASSWORD}@{settings.DB_HOST}:'

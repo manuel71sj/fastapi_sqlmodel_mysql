@@ -1,11 +1,12 @@
 import uvicorn
 
+from path import Path
+
 from common.log import log
 
 # from common.log import log
 from core.conf import settings
 from core.registrar import register_app
-from path import Path
 
 app = register_app()
 

@@ -1,9 +1,10 @@
 import sys
 
-from common.log import log
-from core.conf import settings
 from redis.asyncio.client import Redis
 from redis.exceptions import AuthenticationError, TimeoutError
+
+from common.log import log
+from core.conf import settings
 
 
 class RedisCli(Redis):

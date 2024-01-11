@@ -1,13 +1,14 @@
 from datetime import datetime
 
-from common import jwt
-from crud.base import CRUDBase
-from models.user import User
-from schemas.user import Avatar, CreateUser, UpdateUser
 from sqlalchemy import and_
 from sqlalchemy.sql import Select
 from sqlmodel import desc, select
 from sqlmodel.ext.asyncio.session import AsyncSession
+
+from common import jwt
+from crud.base import CRUDBase
+from models.user import User
+from schemas.user import Avatar, CreateUser, UpdateUser
 
 
 class CRUDUser(CRUDBase[User, CreateUser, UpdateUser]):

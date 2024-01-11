@@ -5,9 +5,10 @@ import os
 
 from typing import TYPE_CHECKING
 
+from loguru import logger
+
 from core import path_conf
 from core.conf import settings
-from loguru import logger
 
 if TYPE_CHECKING:
     import loguru

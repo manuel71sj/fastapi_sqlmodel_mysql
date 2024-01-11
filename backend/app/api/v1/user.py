@@ -1,13 +1,14 @@
 from typing import Annotated
 
+from fastapi import APIRouter, Query
+from sqlmodel.ext.asyncio.session import AsyncSession
+
 from common.jwt import CurrentUser, DependsJwtUser
 from common.pagination import PageDepends, paging_data
 from common.response.response_schema import response_base
 from database.db_mysql import async_engine
-from fastapi import APIRouter, Query
 from schemas.user import Avatar, CreateUser, GetUserInfo, ResetPassword, UpdateUser
 from services.user_service import UserService
-from sqlmodel.ext.asyncio.session import AsyncSession
 
 router = APIRouter()
 
@@ -70,8 +71,9 @@ async def status_set(current_user: CurrentUser, pk: int):
 
 @router.delete(
     path='/{username}',
-    summary='사용자 취소',
-    description='사용자 로그아웃! = 사용자가 로그아웃되었음을 의미하며, 로그아웃 후 데이터베이스에서 사용자가 삭제됩니다.',
+    summary='사용자 삭제',
+    description='사용자 로그아웃! = 사용자가 로그아웃되었음을 의미하며, '
+    '로그아웃 후 데이터베이스에서 사용자가 삭제됩니다.',
     dependencies=[DependsJwtUser],
 )
 async def delete_user(current_user: CurrentUser, username: str):

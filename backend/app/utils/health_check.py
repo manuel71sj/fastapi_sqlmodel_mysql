@@ -1,9 +1,10 @@
 
 from math import ceil
 
-from common.exception import errors
 from fastapi import FastAPI, Request, Response
 from fastapi.routing import APIRoute
+
+from common.exception import errors
 
 
 def ensure_unique_route_names(app: FastAPI) -> None:

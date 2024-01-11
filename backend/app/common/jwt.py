@@ -3,18 +3,19 @@ from datetime import datetime, timedelta
 from typing import Any
 
 from asgiref.sync import sync_to_async
-from common.exception.errors import AuthorizationError, TokenError
-from core.conf import settings
-from crud.crud_user import UserDao
-from database.db_mysql import async_engine
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
-from models.user import User
 from passlib.context import CryptContext
 from pydantic import ValidationError
 from sqlmodel.ext.asyncio.session import AsyncSession
 from typing_extensions import Annotated
+
+from common.exception.errors import AuthorizationError, TokenError
+from core.conf import settings
+from crud.crud_user import UserDao
+from database.db_mysql import async_engine
+from models.user import User
 
 pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
